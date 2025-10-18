@@ -500,23 +500,14 @@ Curieuse, rigoureuse et motivée, j’aime apprendre en continu, relever de nouv
 
         <div class="contact-container mt-4">
           <!-- FORMULAIRE -->
-          <div class="form-card" data-aos="fade-right">
-            <form id="contactForm">
-              <div class="mb-3 ">
-                <label class="form-label small">Nom</label>
-                <input id="name" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label small">Email</label>
-                <input id="email" type="email" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <label class="form-label small">Message</label>
-                <textarea id="message" rows="4" class="form-control" required></textarea>
-              </div>
-              <button class="btn-accent w-100" type="submit"><i class="fa fa-paper-plane me-2"></i>Envoyer</button>
-            </form>
-          </div>
+       <form id="contactForm" method="POST" action="envoyer_message.php">
+        <input type="text" class="form-control" id="name" name="nom" placeholder="Votre nom" required>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Votre email" required>
+        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Votre message" required></textarea>
+        <button type="submit" class="btn-dore w-100 mt-2">
+          <i class="fa fa-paper-plane me-2"></i>Envoyer
+        </button>
+      </form>
 
           <!-- SOCIAL -->
           <div class="social-card" data-aos="fade-left">
@@ -580,17 +571,32 @@ Curieuse, rigoureuse et motivée, j’aime apprendre en continu, relever de nouv
     })();
 
     // Small form handler (demo)
-    document.getElementById('contactForm').addEventListener('submit', function(e){
-      e.preventDefault();
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-      if(!name || !email || !message){ alert('Merci de compléter tous les champs.'); return; }
-      // Replace with actual fetch to your backend if you have one
-      alert('Merci ' + name + ' — message reçu ! Je te répondrai bientôt.');
-      this.reset();
+
+
+        document.getElementById('contactForm').addEventListener('submit', function(e){
+        // e.preventDefault();
+        const formData = new FormData(this);
+        for (let [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+    
+
+        // Envoi normal après test
+        this.submit();
+
     });
 
+
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.has('success')) {
+    alert('✅ Merci pour votre message ! Je vous répondrai bientôt.');
+    // Supprime le paramètre pour éviter que l’alerte se relance si on recharge la page
+    window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+
+
+    
     // formations
         window.addEventListener('scroll', () => {
       const section = document.getElementById('formations');
@@ -599,7 +605,19 @@ Curieuse, rigoureuse et motivée, j’aime apprendre en continu, relever de nouv
         section.classList.add('visible');
       }
     });
+
   </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('success')) {
+        alert('✅ Merci pour votre message ! Je vous répondrai bientôt.');
+        // remove ?success=1 from URL after showing alert
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+});
+</script>
+
 
 </body>
 </html>
