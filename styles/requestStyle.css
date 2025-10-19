@@ -1,0 +1,108 @@
+  
+    :root{
+      --bg1: #0f0216;
+      --bg2: #2e0b4c;
+      --accent: #8b32ff;
+      --accent-2: #d7b8ff;
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.06);
+      --text: #f6f5fb;
+      --muted: rgba(255,255,255,0.72);
+      --shadow: 0 12px 40px rgba(0,0,0,0.6);
+    }
+
+    /* Page background: subtle radial lights + slow rotation */
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      color:var(--text);
+      background: radial-gradient(900px 400px at 10% 10%, rgba(139,50,255,0.12), transparent),
+                  radial-gradient(700px 300px at 90% 80%, rgba(45,12,86,0.08), transparent),
+                  linear-gradient(180deg,var(--bg2) 0%, var(--bg1) 100%);
+      overflow-x:hidden;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      position:relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* rotating decorative layer */
+    body::after{
+      content:"";
+      position:fixed; inset:-25%;
+      background: conic-gradient(from 200deg at 50% 50%, rgba(139,50,255,0.06), rgba(0,0,0,0.02) 40%, rgba(215,184,255,0.03));
+      transform:rotate(0deg);
+      z-index:0;
+      animation:spin 40s linear infinite;
+      pointer-events:none;
+      mix-blend-mode:overlay;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* layout card */
+    .site-wrap{position:relative; z-index:2; display:flex; justify-content:center; width:100%;}
+    .main-card{
+      width:100%; max-width:600px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:16px; overflow:hidden; box-shadow:var(--shadow);
+      border:1px solid rgba(255,255,255,0.04);
+      backdrop-filter: blur(6px);
+    }
+
+    /* topbar */
+    .topbar{display:flex;align-items:center;justify-content:center;padding:18px 26px;background:linear-gradient(90deg, rgba(139,50,255,0.06), rgba(0,0,0,0.02)); border-bottom:1px solid rgba(255,255,255,0.03)}
+    .brand{display:flex;gap:12px;align-items:center;font-family:"Montserrat",sans-serif;font-weight:800}
+    .dot{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#a95bff);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;box-shadow:0 6px 18px rgba(139,50,255,0.25)}
+
+    /* success content */
+    .success-content {
+      padding: 50px 40px;
+      text-align: center;
+    }
+    
+    .success-icon {
+      font-size: 80px;
+      color: var(--accent);
+      margin-bottom: 20px;
+      animation: bounce 1s ease-in-out;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+      40% {transform: translateY(-20px);}
+      60% {transform: translateY(-10px);}
+    }
+    
+    .success-title {
+      font-family: "Montserrat", sans-serif;
+      font-size: 32px;
+      margin-bottom: 15px;
+      color: var(--accent-2);
+    }
+    
+    .success-message {
+      color: var(--muted);
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    
+    .btn-accent{
+      display:inline-flex; align-items:center; gap:10px;
+      background:linear-gradient(90deg,var(--accent), #b57bff);
+      color:#fff; padding:11px 18px; border-radius:10px; border:none; font-weight:800;
+      box-shadow:0 8px 30px rgba(139,50,255,0.18);
+      transition:all .28s ease;
+      text-decoration: none;
+    }
+    .btn-accent:hover{transform:translateY(-3px); filter:brightness(1.02); box-shadow:0 18px 60px rgba(139,50,255,0.28); color: #fff;}
+
+    /* footer */
+    .panel-footer{padding:20px; text-align:center; background:linear-gradient(90deg, rgba(30,6,46,0.9), rgba(45,12,86,0.9)); color:rgba(255,255,255,0.8)}
+    .panel-footer a{color:var(--text); margin:0 8px; display:inline-inline; transition:transform .22s, color .22s}
+    .panel-footer a:hover{transform:translateY(-4px); color:var(--accent-2)}
+  

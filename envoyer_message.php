@@ -27,7 +27,7 @@ $stmt->bind_param("sss", $nom, $email, $message);
 // Exécution
 if($stmt->execute()){
     // ✅ Sauvegarde réussie → on redirige proprement vers index.html
-    header("Location: index.php");
+    header("Location: request.html");
     echo "<script> alert('Merci pour votre message ! Je vous répondrai bientôt.'); window.location.href='index.p'; </script>";
     exit();
 } else {
